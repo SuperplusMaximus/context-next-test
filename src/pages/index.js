@@ -7,7 +7,9 @@ import { SomeContext } from './_app'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const PageContext = createContext('PAGE_CONTEXT');
+export const getServerSideProps = async () => {
+  return { props: { changeContext: 99 } };
+};
 
 export default function Home() {
   const { contextValue, setContextValue } = useContext(SomeContext);
@@ -17,10 +19,10 @@ export default function Home() {
   // setContextValue(5)
   // console.log("🚀 ~ file: index.js:14 ~ Home ~ contextValue:", contextValue)
 
-  useEffect(() => {
-    setContextValue(5)
-    console.log("🚀 ~ file: index.js:14 ~ Home ~ contextValue:", contextValue)
-  }, [contextValue]);
+  // useEffect(() => {
+  //   setContextValue(contextValue + 1)
+  //   console.log("🚀 ~ file: index.js:14 ~ Home ~ contextValue:", contextValue)
+  // }, [contextValue]);
 
   return (
     <>
@@ -30,10 +32,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
+      <div className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
           <SomeContext.Provider value={contextValue + 1}>
-            <h1>ZEFUYERGFYGF: {contextValue}</h1>
+            <h1>ZEFUYERGFYGF: {contextValue + 1}</h1>
           </SomeContext.Provider>
 
           <h1>ZEFUYERGFYGF: {contextValue}</h1>
@@ -129,7 +131,7 @@ export default function Home() {
             </p>
           </a>
         </div>
-      </main>
+      </div>
     </>
   )
 }
