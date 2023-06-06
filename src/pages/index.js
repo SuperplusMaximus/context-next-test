@@ -2,10 +2,26 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import { useContext, useEffect, createContext } from 'react'
+import { SomeContext } from './_app'
 
 const inter = Inter({ subsets: ['latin'] })
 
+const PageContext = createContext('PAGE_CONTEXT');
+
 export default function Home() {
+  const { contextValue, setContextValue } = useContext(SomeContext);
+  console.log("🚀 ~ file: index.js:12 ~ Home ~ contextValue:", contextValue)
+
+  // NOTE: Pac content du set()
+  // setContextValue(5)
+  // console.log("🚀 ~ file: index.js:14 ~ Home ~ contextValue:", contextValue)
+
+  useEffect(() => {
+    setContextValue(5)
+    console.log("🚀 ~ file: index.js:14 ~ Home ~ contextValue:", contextValue)
+  }, [contextValue]);
+
   return (
     <>
       <Head>
@@ -16,6 +32,11 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
+          <SomeContext.Provider value={contextValue + 1}>
+            <h1>ZEFUYERGFYGF: {contextValue}</h1>
+          </SomeContext.Provider>
+
+          <h1>ZEFUYERGFYGF: {contextValue}</h1>
           <p>
             Get started by editing&nbsp;
             <code className={styles.code}>src/pages/index.js</code>
